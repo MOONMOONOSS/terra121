@@ -18,8 +18,8 @@ import net.minecraft.item.EnumDyeColor;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
 import net.minecraft.world.biome.Biome;
-import net.minecraftforge.event.entity.player.PlayerContainerEvent;
 
+// old road generator, leaving it in just in case
 public class RoadGenerator implements ICubicPopulator {
 	
     private static final IBlockState ASPHALT = Blocks.CONCRETE.getDefaultState().withProperty(BlockColored.COLOR, EnumDyeColor.GRAY);
@@ -193,7 +193,10 @@ public class RoadGenerator implements ICubicPopulator {
 		
 		                    //clear the above blocks (to a point, we don't want to be here all day)
 		                    IBlockState defState = Blocks.AIR.getDefaultState();
-		                    for (int ay = y + 1; ay < 16 * 2 && world.getBlockState(new BlockPos(x + cubeX * 16, ay + cubeY * 16, z + cubeZ * 16)) != defState; ay++) {
+		                    for (int ay = y + 1; ay < 16 * 2 &&
+                                    (
+                                            world.getBlockState(new BlockPos(x + cubeX * 16, ay + cubeY * 16, z + cubeZ * 16)) != defState
+                                    ); ay++) {
 		                        world.setBlockState(new BlockPos(x + cubeX * 16, ay + cubeY * 16, z + cubeZ * 16), defState);
 		                    }
                         }
